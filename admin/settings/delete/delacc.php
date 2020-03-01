@@ -17,11 +17,11 @@ if(mysqli_num_rows($query) > 0) {
         unset($_SESSION['login']);
         session_destroy();
         header('Location: ../../../index.php');
-        mysqli_close($connect);
     } else {
         echo "<p>Password incorrect</p>";
         include("delete.php");
     }
 }
 
+mysqli_close($connect);
 ?>

@@ -18,12 +18,12 @@
 		echo "A user wih this e-mail exists already";
    } else {
 
-	$sql = "INSERT INTO `users` SET login='$login', password='$password', email='$email', admin='0'";
+	$sql = "INSERT INTO `users` SET login='$login', password='$password', email='$email'";
 	$query = mysqli_query($connect, $sql);
 	
 	header("Location: ../login/login.php");
 
-	mysqli_close($connect);	
+	mysqli_close($connect);
 
    }
 

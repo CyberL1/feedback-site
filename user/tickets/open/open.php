@@ -3,9 +3,9 @@
 require("../../../inc/connect.php");
 
 session_start();
-if(!isset($_SESSION['login'])) { // checks if we are logined
-header('Location: ../../login/login.php');
-exit();
+if (!isset($_SESSION['login'])) { // checks if we are logined
+    header('Location: ../../login/login.php');
+    exit();
 }
 $login = $_SESSION['login'];
 mysqli_query($connect, "SELECT * FROM `users`");
@@ -27,7 +27,7 @@ if($admincheck = mysqli_query ($connect, "SELECT * FROM `users` WHERE `admin` = 
 		<div>
 			<div>
 				<div>
-					<div><h2>Submit a new suggestion</h2></div>
+					<div><h2>Open a ticket</h2></div>
 					<form action="success.php" method="post" id="suggestionForm" class="form-horizontal">
 						
 						<div class="form-group">

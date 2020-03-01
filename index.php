@@ -9,7 +9,18 @@ session_start();
 if(!isset($_SESSION['login'])) {
     include("inc/menu.php");
 } else {
-    include("inc/menu-login.php");
+   $login = $_SESSION['login'];
+   mysqli_query($connect, "SELECT * FROM `users`");
+   if($admincheck = mysqli_query ($connect, "SELECT * FROM `users` WHERE `admin` = '1' AND `login`='$login'")) {
+      while($isadmin = mysqli_fetch_assoc($admincheck)) {
+         include("inc/menu-admin.php");
+      }
+   }
+   if($admincheck = mysqli_query ($connect, "SELECT * FROM `users` WHERE `admin` = '0' AND `login`='$login'")) {
+      while($isadmin = mysqli_fetch_assoc($admincheck)) {
+         include("inc/menu-login.php");
+      }
+}
 }
 
 if(isset($_GET['show'])) {

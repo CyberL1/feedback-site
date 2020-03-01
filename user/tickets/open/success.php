@@ -13,7 +13,7 @@ $nick = $_SESSION['login'];
 $content = $_POST['content'];
 $date = date("d m Y");
 	
-	mysqli_query($connect, "INSERT INTO `suggestions` SET title='$title', nick='$nick', content='$content', date='$date', edited='0', votes='0', edit_date='Not edited', status='Posted'");
+	mysqli_query($connect, "INSERT INTO `user_tickets` SET title='$title', nick='$nick', content='$content', date='$date', status='open'");
 
 	   header('Location: ../../../index.php');
 

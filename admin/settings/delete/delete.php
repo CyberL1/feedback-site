@@ -1,25 +1,16 @@
-<?php include("../../../inc/header.php"); ?>
-
 <?php
+require("../../../inc/connect.php");
+include("../../../inc/header.php");
+?>
+<?php
+session_start();
 if (!isset($_SESSION['login'])) { // checks if we are logined
     header('Location: ../../login/login.php');
     exit();
 }
-$login = $_SESSION['login'];
-mysqli_query($connect, "SELECT * FROM `users`");
-if($admincheck = mysqli_query ($connect, "SELECT * FROM `users` WHERE `admin` = '1' AND `login`='$login'")) {
-   while($isadmin = mysqli_fetch_assoc($admincheck)) {
-      include("../../../inc/menu-admin.php");
-   }
-}
-if($admincheck = mysqli_query ($connect, "SELECT * FROM `users` WHERE `admin` = '0' AND `login`='$login'")) {
-   while($isadmin = mysqli_fetch_assoc($admincheck)) {
-    include("../../../inc/menu-login.php");
-   }
-}
 ?>
-
 <div class="container">
+<?php include("../../../inc/menu-login.php"); ?>
 	<div>
 	<hr><br><br>
             <div class="text-center">
@@ -44,3 +35,4 @@ if($admincheck = mysqli_query ($connect, "SELECT * FROM `users` WHERE `admin` = 
 </div>
 </div>
 </div>
+<?php mysqli_close($connect); ?>

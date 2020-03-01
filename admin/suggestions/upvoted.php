@@ -6,22 +6,12 @@ require '../../inc/connect.php';
 
 session_start();
 
-if (!isset($_SESSION['login'])) { // checks if we are logined
-    header('Location: ../../login/login.php');
+if(!isset($_SESSION['login'])) {
+    header('Location: ../../index.php');
     exit();
 }
-$login = $_SESSION['login'];
-mysqli_query($connect, "SELECT * FROM `users`");
-if($admincheck = mysqli_query ($connect, "SELECT * FROM `users` WHERE `admin` = '1' AND `login`='$login'")) {
-   while($isadmin = mysqli_fetch_assoc($admincheck)) {
-      include("../../inc/menu-admin.php");
-   }
-}
-if($admincheck = mysqli_query ($connect, "SELECT * FROM `users` WHERE `admin` = '0' AND `login`='$login'")) {
-   while($isadmin = mysqli_fetch_assoc($admincheck)) {
-    include("../../inc/menu-login.php");
-   }
-}
+
+include('../../inc/menu-login.php');
 
 if ($upvotedquery = mysqli_query ($connect, "SELECT * FROM `suggestions` ORDER BY `nr` DESC")) {
     echo "<h1 class='text-center'>Upvoted suggestions<br></h1><hr>";

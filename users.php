@@ -1,15 +1,25 @@
-<?php include ("inc/header.php");
-
-require 'inc/connect.php';
+<?php
+include("inc/header.php");
+require("inc/connect.php");
 
 session_start();
 
-if(!isset($_SESSION['login'])) {
+if (!isset($_SESSION['login'])) { // checks if we are logined
     include("inc/menu.php");
 } else {
-    include("inc/menu-login.php");
-}
-
+   $login = $_SESSION['login'];
+   mysqli_query($connect, "SELECT * FROM `users`");
+   if($admincheck = mysqli_query ($connect, "SELECT * FROM `users` WHERE `admin` = '1' AND `login`='$login'")) {
+       while($isadmin = mysqli_fetch_assoc($admincheck)) {
+          include("inc/menu-admin.php");
+         }
+      }
+      if($admincheck = mysqli_query ($connect, "SELECT * FROM `users` WHERE `admin` = '0' AND `login`='$login'")) {
+         while($isadmin = mysqli_fetch_assoc($admincheck)) {
+            include("inc/menu-login.php");
+         }
+         }
+   }
 if(isset($_GET['nick'])) {
     $nick = $_GET['nick'];
 

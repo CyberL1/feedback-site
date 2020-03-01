@@ -1,39 +1,34 @@
-﻿<?php include ("../../../inc/header.php"); ?>
+﻿<?php include ("../../../../inc/header.php"); ?>
 <?php
-require("../../../inc/connect.php");
+require("../../../../inc/connect.php");
 
 session_start();
-if(!isset($_SESSION['login'])) { // checks if we are logined
-header('Location: ../../login/login.php');
-exit();
+if (!isset($_SESSION['login'])) { // checks if we are logined
+    header('Location: ../../../login/login.php');
+    exit();
 }
 $login = $_SESSION['login'];
 mysqli_query($connect, "SELECT * FROM `users`");
 if($admincheck = mysqli_query ($connect, "SELECT * FROM `users` WHERE `admin` = '1' AND `login`='$login'")) {
    while($isadmin = mysqli_fetch_assoc($admincheck)) {
-      include("../../../inc/menu-admin.php");
+      include("../../../../inc/menu-admin.php");
    }
 }
 if($admincheck = mysqli_query ($connect, "SELECT * FROM `users` WHERE `admin` = '0' AND `login`='$login'")) {
    while($isadmin = mysqli_fetch_assoc($admincheck)) {
-    include("../../../inc/menu-login.php");
+    include("../../../../inc/menu-login.php");
    }
 }
 ?>
-
-<div class="container"><center>
+<div class="container">
+<?php $nr = $_GET['nr']; ?><center>
 	<div>
 		<br><br>
 		<div>
 			<div>
 				<div>
-					<div><h2>Submit a new suggestion</h2></div>
-					<form action="success.php" method="post" id="suggestionForm" class="form-horizontal">
-						
-						<div class="form-group">
-							<div class="col-lg-10">
-								<input type="text" id="clean" class="form-control" name="title" placeholder="Title" max="211" required>
-							</div>
+					<div><h2>Comment ticket #<?php echo $nr ?></h2></div>
+					<form action="success.php?nr=<?php echo $nr ?>" method="post" id="commentForm" class="form-horizontal">
 						</div><br>
 						<div class="form-group">
 							<div class="col-lg-10">
