@@ -1,6 +1,9 @@
-<?php include("../../../inc/header.php"); ?>
-
 <?php
+require("../../../inc/connect.php");
+include("../../../inc/header.php");
+
+session_start();
+
 if (!isset($_SESSION['login'])) { // checks if we are logined
     header('Location: ../../login/login.php');
     exit();
