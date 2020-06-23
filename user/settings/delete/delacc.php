@@ -5,6 +5,11 @@ session_start();
 $login = $_SESSION['login'];
 $password = $_POST['password'];
 
+if (!isset($_SESSION['login'])) { // checks if we are logined
+    header('Location: ../../login');
+    exit();
+}
+
 $query = mysqli_query($connect, "SELECT `password` FROM `users` WHERE `login` = '$login'");
 if(mysqli_num_rows($query) > 0) {
     $row = mysqli_fetch_array($query);
@@ -16,10 +21,10 @@ if(mysqli_num_rows($query) > 0) {
         mysqli_query($connect, "DELETE FROM `ticket_comments` WHERE `author` = '$login'");
         unset($_SESSION['login']);
         session_destroy();
-        header('Location: ../../../index.php');
+        header('Location: /');
         mysqli_close($connect);
     } else {
-        echo "<p>Password incorrect</p>";
+        echo "<div class='alert-error'><span class=\"closebtn\" onclick=\"this.parentElement.style.display='none';\">&times;</span>Password incorrect</div>";
         include("delete.php");
     }
 }

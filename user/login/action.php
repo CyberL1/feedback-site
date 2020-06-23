@@ -7,7 +7,7 @@
 	$login = $_POST['login'];
 	$password = $_POST['password'];
 	
-	$query = mysqli_query($connect, "SELECT `password` FROM `users` WHERE `login` = '{$login}'");
+	$query = mysqli_query($connect, "SELECT `password` FROM `users` WHERE `login` = '$login'");
 	
 	if(mysqli_num_rows($query) > 0) {
 		$row = mysqli_fetch_array($query);
@@ -16,12 +16,12 @@
 			$_SESSION['login'] = $login;
 			header("Location: ../../index.php");
 		} else {
-			echo '<p>Wrong password</p><hr>'; // if password is wrong
-			include('login.php');
+			echo "<div class='alert-error'><span class=\"closebtn\" onclick=\"this.parentElement.style.display='none';\">&times;</span>Wrong password</div>"; // if password is wrong
+			include('index.php');
 		}
 	} else {
-		echo '<p>Wrong username</p><hr>'; // if username is wrong
-		include('login.php');
+		echo "<div class='alert-error'><span class=\"closebtn\" onclick=\"this.parentElement.style.display='none';\">&times;</span>Wrong username</div>"; // if username is wrong
+		include('index.php');
 	}
 
 	mysqli_close($connect);

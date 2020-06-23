@@ -12,16 +12,16 @@
 
 	if(strlen($login) > 22) {
 		echo "Nick cannot be longer than 22 characters";
-	} else if(mysqli_num_rows($sqlchecklogin) > 0) {
+	} else if (mysqli_num_rows($sqlchecklogin) > 0) {
 		echo "A user with this nick exists already";
-	} else if(mysqli_num_rows($sqlcheckmail) > 0) {
+	} else if (mysqli_num_rows($sqlcheckmail) > 0) {
 		echo "A user wih this e-mail exists already";
    } else {
 
 	$sql = "INSERT INTO `users` SET login='$login', password='$password', email='$email', admin='0'";
 	$query = mysqli_query($connect, $sql);
 	
-	header("Location: ../login/login.php");
+	header("Location: ../login");
 
 	mysqli_close($connect);	
 

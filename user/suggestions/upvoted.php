@@ -7,10 +7,18 @@ require '../../inc/connect.php';
 session_start();
 
 if (!isset($_SESSION['login'])) { // checks if we are logined
-    header('Location: ../../login/login.php');
+    header('Location: ../../login');
     exit();
 }
+
 $login = $_SESSION['login'];
+
+if($admincheck = mysqli_query ($connect, "SELECT * FROM `users` WHERE `admin` = '2' AND `login` = '$login'")) {
+    while($isadmin = mysqli_fetch_assoc($admincheck)) {
+       include("../../inc/menu-superadmin.php");
+    }
+ }
+
 mysqli_query($connect, "SELECT * FROM `users`");
 if($admincheck = mysqli_query ($connect, "SELECT * FROM `users` WHERE `admin` = '1' AND `login`='$login'")) {
    while($isadmin = mysqli_fetch_assoc($admincheck)) {

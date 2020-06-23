@@ -5,7 +5,7 @@ require 'inc/connect.php';
 session_start();
 
 if(!isset($_SESSION['login'])) {
-    header('Location: user/login/login.php');
+    header('Location: user/login');
     exit();
 }
 
@@ -22,7 +22,7 @@ $voter = $_SESSION['login'];
              $voter = $vote['login'];
              mysqli_query($connect, "INSERT INTO `voters` (`vote_nr`, `voter`) VALUES ($nr, $voter)");
              $result = mysqli_query($connect, "SELECT * FROM `voters` WHERE `vote_nr`='$nr' AND `voter`='$voter'");
-             if(mysqli_num_rows($result)){
+             if(mysqli_num_rows($result)) {
                  mysqli_query($connect, "UPDATE `suggestions` SET `votes`=`votes`-1 WHERE `nr` = $nr");
                  mysqli_query($connect, "DELETE FROM `voters` WHERE `vote_nr`='$nr' AND `voter`='$voter'");
                  header("Location: index.php?show=$nr");

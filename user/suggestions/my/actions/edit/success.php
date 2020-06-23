@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-if(!isset($_SESSION['login'])) {
-	header('Location: ../../../../../login.php');
+if(!isset($_SESSION['login'])) { // Checks if we are logined
+	header('Location: ../../../../../login');
 	exit();
 }
 
@@ -23,7 +23,9 @@ if ($query = mysqli_query($connect, "SELECT * FROM `suggestions`, `users` WHERE 
 		} else {
 		$nr = $edit['nr'];
 		mysqli_query($connect, "UPDATE `suggestions` SET title='$title', content='$content', edit_date='$date', edited='1' WHERE `nr`='$nr'");
-		header('Location: ../../my.php');
+
+		echo "<div class='alert-success'><span class=\"closebtn\" onclick=\"this.parentElement.style.display='none';\">&times;</span>Suggestion edited</div>";
+		include('index.php');
 		}
 	}
 }

@@ -3,8 +3,8 @@ require("../../../../inc/header.php");
 require("../../../../inc/connect.php");
 session_start();
 
-if(!isset($_SESSION['login'])) {
-	header('Location: ../../../../login.php');
+if(!isset($_SESSION['login'])) { // Checks if we are logined
+	header('Location: ../../../../login');
 	exit();
 }
 
@@ -26,10 +26,15 @@ if ($query = mysqli_query($connect, "SELECT * FROM `user_tickets` WHERE `nr`='$n
 $author = $_SESSION['login'];
 $content = $_POST['content'];
 $date = date("d m Y");
+
+$query = mysqli_query($connect, "SELECT `email` FROM `user_tickets` WHERE `nick` = '$author'");
+$fetch = mysqli_fetch_array($query);
+$adminmail = $fetch['email'];
+
+		mail($adminmail, "New comment on support ticket", "$author has commented support ticket $nr\r\n\r\n$content");
 	
 	mysqli_query($connect, "INSERT INTO `ticket_comments` SET ticket_nr='$nr', author='$author', content='$content', date='$date'");
-
-	   header("Location: ../my.php?show=$nr");
+	header("Location: ..?show=$nr");
 
 	   mysqli_close($connect);
 ?>

@@ -3,7 +3,7 @@ require("../../../../inc/connect.php");
 
 session_start();
 if(!isset($_SESSION['login'])) {
-	header('Location: ../../../login/login.php');
+	header('Location: ../../../login');
 	exit();
 }
 
@@ -20,8 +20,10 @@ if ($query = mysqli_query($connect, "SELECT * FROM `suggestions`, `users` WHERE 
         } else {
             $nr = $del['nr'];
             mysqli_query($connect, "DELETE FROM `suggestions` WHERE `nr`='$nr'");
-            mysqli_query($connect, "DELETE FROM `voters` WHERE `vote_nr`='$nr'");
-            header('Location: ../my.php');
+			mysqli_query($connect, "DELETE FROM `voters` WHERE `vote_nr`='$nr'");
+
+			echo "<div class='alert-success'><span class=\"closebtn\" onclick=\"this.parentElement.style.display='none';\">&times;</span>Suggestion deleted</div>";
+			include('index.php');
 		}
 	}
 }
