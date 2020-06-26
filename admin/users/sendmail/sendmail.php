@@ -23,7 +23,7 @@
 		echo "<div class='alert-success'><span class=\"closebtn\" onclick=\"this.parentElement.style.display='none';\">&times;</span>Mail sent to: $login ($email)</div>";
 		include('index.php');
 	} else {
-		echo "<div class='alert-error'><span class=\"closebtn\" onclick=\"this.parentElement.style.display='none';\">&times;</span>ccount with username $login does not exist</div>";
+		echo "<div class='alert-error'><span class=\"closebtn\" onclick=\"this.parentElement.style.display='none';\">&times;</span>Account with username $login does not exist</div>";
 		include('index.php');
 	}
 
