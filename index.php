@@ -68,8 +68,8 @@ if ($querysuggestion = mysqli_query ($connect, "SELECT * FROM `suggestions` WHER
                      while ($list = mysqli_fetch_assoc($querylist)) {
                         $nr = $list['nr'];
                         $nick = $list['nick'];
-                        if(!$list['edited']) echo "<a href='?show=$nr'><p class='text-left'><b>".substr(strip_tags($list['title']), 0, 32)."</a></b></p><p class='text-right'><i>".strip_tags($list['date'])."</i> Author: <b><a href='users.php?nick=$nick'>".substr(strip_tags($list['nick']), 0, 22)."</a></b></i> | Votes: <b>".$list['votes']."</b></p><p class='text-right'>Status: <b>".$list['status']."</b></p>\n<hr>";
-                        if($list['edited']) echo "<a href='?show=$nr'><p class='text-left'><b>".substr(strip_tags($list['title']), 0, 32)."</a></b></p><p class='text-right'><i>".strip_tags($list['date'])."</i> Author: <b><a href='users.php?nick=$nick'>".substr(strip_tags($list['nick']), 0, 22)."</a></b></i> | Votes: <b>".$list['votes']."</b></p><p class='text-right'>Status: <b>".$list['status']."</b> | Edited on: <b>".$list['edit_date']."</b></p>\n<hr>";
+                        if(!$list['edited']) echo "<a href='?show=$nr'><p class='text-left'><b>".substr(strip_tags($list['title']), 0, 32)."</a></b></p><p class='text-left'><i>".strip_tags($list['date'])."</i> Author: <b><a href='users.php?nick=$nick'>".substr(strip_tags($list['nick']), 0, 22)."</a></b></i> | Votes: <b>".$list['votes']."</b></p><p class='text-right'>Status: <b>".$list['status']."</b></p>\n<hr>";
+                        if($list['edited']) echo "<a href='?show=$nr'><p class='text-left'><b>".substr(strip_tags($list['title']), 0, 32)."</a></b></p><p class='text-left'><i>".strip_tags($list['date'])."</i> Author: <b><a href='users.php?nick=$nick'>".substr(strip_tags($list['nick']), 0, 22)."</a></b></i> | Votes: <b>".$list['votes']."</b></p><p class='text-right'>Status: <b>".$list['status']."</b> | Edited on: <b>".$list['edit_date']."</b></p>\n<hr>";
                         }
                      }
                           
